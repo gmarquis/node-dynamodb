@@ -91,11 +91,9 @@ const gm = {
     },
 };
 
-const seedData = async () => {
-
-}
-
-//addOrUpdateCharacter(hp);
+//addOrUpdateCharacter();
 //getCharacterById('0');
 //deleteCharacter('0');
 //getCharacters();
+//node seed.js
+
