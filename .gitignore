@@ -1,4 +1,9 @@
 # Local .terraform directories
+
+node/
+node_modules/
+.env
+
 **/.terraform/*
 
 # .tfstate files
