@@ -6,7 +6,7 @@ AWS.config.update({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
-const dynamoClient = new AWS.DynamoDB.DocumentClient();
+const dynamoClient = new AWS.DynamoDB.DocumentClient(); // table connect
 const TABLE_NAME = 'dynamo-table-one';
 
 const getCharacters = async () => {
@@ -54,16 +54,6 @@ module.exports = {
     deleteCharacter,
 };
 
-const getCharacterByName = async (id) => {
-    const params = {
-        TableName: TABLE_NAME,
-        Key: {
-            name,
-        },
-    };
-    return await dynamoClient.get(params).promise();
-}
-
 const hp = {
     id: '0',
     name: 'Cherry Potter',
@@ -105,7 +95,7 @@ const seedData = async () => {
 
 }
 
-addOrUpdateCharacter(hp);
+//addOrUpdateCharacter(hp);
 //getCharacterById('0');
 //deleteCharacter('0');
 //getCharacters();
