@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { addOrUpdateCharacter } = require('./dynamo');
+const {addOrUpdateCharacter} = require('./dynamo');
 
 const seedData = async () => {
     const url = 'https://hp-api.onrender.com/api/characters';
@@ -12,7 +12,7 @@ const seedData = async () => {
         await Promise.all(characterPromises);
     } catch (error) {
         console.error(err);
-        console.log('AHHHHHH');
+        console.log('An error occurred');
     }
 };
 

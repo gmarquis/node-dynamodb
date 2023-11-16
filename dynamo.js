@@ -4,9 +4,11 @@ AWS.config.update({
     region: process.env.AWS_DEFAULT_REGION,
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+
 });
 
-const dynamoClient = new AWS.DynamoDB.DocumentClient(); // table connect
+//  const {addOrUpdateCharacter} = require('./seed');
+const dynamoClient = new AWS.DynamoDB.DocumentClient(); // attach table
 const TABLE_NAME = 'dynamo-table-one';
 
 const getCharacters = async () => {
@@ -22,10 +24,11 @@ const getCharacterById = async (id) => {
     const params = {
         TableName: TABLE_NAME,
         Key: {
-            id
+            id,
         },
     };
     return await dynamoClient.get(params).promise();
+    console.log(dynamoClient.get(params).promise());
 }
 
 const addOrUpdateCharacter = async (character) => {
@@ -54,9 +57,15 @@ module.exports = {
     deleteCharacter,
 };
 
+const test = {
+    id: '9999',
+    name: 'Test Tester',
+    house: 'Testindor'
+};
+
 const hp = {
     id: '0',
-    name: 'Cherry Potter',
+    name: 'Harry Potter',
     house: 'Gryffindor',
     gender: 'male',
     dateOfBirth: "31-07-1980",
@@ -91,9 +100,8 @@ const gm = {
     },
 };
 
-//addOrUpdateCharacter();
-//getCharacterById('0');
-//deleteCharacter('0');
+addOrUpdateCharacter(gm);
+//deleteCharacter('');
 //getCharacters();
+//getCharacterById('');
 //node seed.js
-

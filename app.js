@@ -1,23 +1,28 @@
+// node 'seed.js' js-url to populate dynamo
+// 'put' needs: localhost/characters/id
+// http://localhost:3000/characters/1
+// nodemon dynamo.js >> functions
+
 const express = require('express');
-const app = express();
 const {
-    addOrUpdateCharacter,
     getCharacters,
-    deleteCharacter,
     getCharacterById,
+    addOrUpdateCharacter,
+    deleteCharacter,
 } = require('./dynamo');
+const app = express();
 
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('Hello from Node');
 });
 
 app.get('/characters', async (req, res) => {
     try {
         const characters = await getCharacters();
         res.json(characters);
-    } catch (err) {
+    } catch (error) {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
     }
@@ -26,11 +31,11 @@ app.get('/characters', async (req, res) => {
 app.get('/characters/:id', async (req, res) => {
     const id = req.params.id;
     try {
-        const character = await getCharacterById(id);
-        res.json(character);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ err: 'Something went wrong' });
+        const characters = await getCharacterById(id);
+        res.json(characters);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Something went wrong' });
     }
 });
 
@@ -39,7 +44,7 @@ app.post('/characters', async (req, res) => {
     try {
         const newCharacter = await addOrUpdateCharacter(character);
         res.json(newCharacter);
-    } catch (err) {
+    } catch (error) {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
     }
@@ -47,19 +52,19 @@ app.post('/characters', async (req, res) => {
 
 app.put('/characters/:id', async (req, res) => {
     const character = req.body;
-    const { id } = req.params;
+    const {id} = req.params;
     character.id = id;
     try {
-        const newCharacter = await addOrUpdateCharacter(character);
-        res.json(newCharacter);
-    } catch (err) {
+        const updatedCharacter = await addOrUpdateCharacter(character);
+        res.json(updatedCharacter);
+    } catch (error) {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
     }
 });
 
 app.delete('/characters/:id', async (req, res) => {
-    const { id } = req.params;
+    const {id} = req.params;
     try {
         res.json(await deleteCharacter(id));
     } catch (err) {
