@@ -1,7 +1,8 @@
+// IM credentials .env
 // node 'seed.js' js-url to populate dynamo
-// 'put' needs: localhost/characters/id
+// 'put' use localhost/characters/id
 // http://localhost:3000/characters/1
-// nodemon dynamo.js >> functions
+// nodemon funcs.js >> the functions
 
 const express = require('express');
 const {
@@ -9,7 +10,7 @@ const {
     getCharacterById,
     addOrUpdateCharacter,
     deleteCharacter,
-} = require('./dynamo');
+} = require('./funcs.js');
 const app = express();
 
 app.use(express.json());

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const {addOrUpdateCharacter} = require('./dynamo');
+const {addOrUpdateCharacter} = require('./funcs.js');
 
 const seedData = async () => {
     const url = 'https://hp-api.onrender.com/api/characters';
